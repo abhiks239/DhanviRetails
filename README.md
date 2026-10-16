@@ -8,7 +8,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
 <style>
-:root{
+// ===== LOGOS: har jagah ke liye logo file ka naam (HTML wale folder me rakhein) =====
+const LOGO={splash:"Logo.png",side:"Logo.png",bill:"Logo.png",footer:"Logo.png"};
+  :root{
   --bg:#ffffff;--bg2:#f4f7fe;--bg3:#eaf1ff;
   --card:#ffffff;--line:#e2e8f0;--line2:#dbe4f5;
   --text:#0b1530;--muted:#5b6b8a;
@@ -265,7 +267,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
       <div class="pc">
         <div class="icn">₹</div>
         <div class="big">Every month</div>
-        <h3>Endless subscriptions</h3>
+          <h3>Endless subscriptions</h3>
         <p>You keep paying monthly or yearly. Stop paying and you lose access to your own records.</p>
       </div>
       <div class="pc">
