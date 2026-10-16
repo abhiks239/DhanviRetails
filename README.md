@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
 <style>
-// ===== LOGOS: har jagah ke liye logo file ka naam (HTML wale folder me rakhein) =====
 const LOGO={splash:"Logo.png",side:"Logo.png",bill:"Logo.png",footer:"Logo.png"};
   :root{
   --bg:#ffffff;--bg2:#f4f7fe;--bg3:#eaf1ff;
