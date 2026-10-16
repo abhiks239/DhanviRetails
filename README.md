@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
 <style>
-const LOGO={splash:"Logo.png",side:"Logo.png",bill:"Logo.png",footer:"Logo.png"};
   :root{
   --bg:#ffffff;--bg2:#f4f7fe;--bg3:#eaf1ff;
   --card:#ffffff;--line:#e2e8f0;--line2:#dbe4f5;
@@ -40,8 +39,11 @@ h1,h2,h3,h4{font-family:var(--h);color:var(--text)}
 /* ---------- header ---------- */
 header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-.logo{display:flex;align-items:center;gap:10px;font-family:var(--h);font-weight:800;font-size:1.25rem;color:var(--text)}
-.logo .mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--sky));display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.05rem;box-shadow:0 6px 16px rgba(37,99,235,.35)}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--h);font-weight:800;font-size:1.25rem;color:var(--text);flex:0 0 auto}
+.logo-mark{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;line-height:0}
+.logo-img{display:block;height:42px;width:auto;max-width:170px;object-fit:contain}
+.logo .mark{display:none;width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--sky));place-items:center;color:#fff;font-weight:800;font-size:1.05rem;box-shadow:0 6px 16px rgba(37,99,235,.35)}
+.logo-mark.no-img .mark{display:grid}
 .nav ul{display:flex;gap:30px;list-style:none}
 .nav ul a{color:var(--muted);font-size:.94rem;font-weight:500;transition:color .2s}
 .nav ul a:hover{color:var(--blue)}
@@ -170,6 +172,8 @@ h2{font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.03em;line-height:1.15;f
 footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:.9rem;background:#fff}
 .foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
 .foot a:hover{color:var(--blue)}
+.foot .logo{font-size:1rem}
+.foot .logo-img{height:34px;max-width:140px}
 .foot .mark{width:32px;height:32px;border-radius:9px;font-size:.9rem}
 
 /* ---------- responsive ---------- */
@@ -199,9 +203,14 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
 
 <header>
   <div class="wrap nav">
-    <a href="#top" class="logo" aria-label="Logo.png">
-      <span class="mark">D</span>Dhanvishta
-    </a>
+   <a href="#top" class="logo" aria-label="Dhanvishta — Home">
+  <span class="logo-mark">
+    <img src="Logo.png" alt="Dhanvishta" class="logo-img"
+         onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
+    <span class="mark" aria-hidden="true">D</span>
+  </span>
+  <span class="logo-text">Dhanvishta</span>
+</a>
     <ul>
       <li><a href="#problem">Problem</a></li>
       <li><a href="#compare">With vs Without</a></li>
@@ -497,8 +506,13 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
 <footer>
   <div class="wrap foot">
     <a href="#top" class="logo">
-      <span class="mark">D</span>Dhanvishta
-    </a>
+  <span class="logo-mark">
+    <img src="Logo.png" alt="Dhanvishta" class="logo-img"
+         onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
+    <span class="mark" aria-hidden="true">D</span>
+  </span>
+  <span class="logo-text">Dhanvishta</span>
+</a>
     <div>
       <a href="https://wa.me/919555613854" target="_blank" rel="noopener">WhatsApp: +91 95556 13854</a> ·
       <a href="mailto:abhiks239@gmail.com">abhiks239@gmail.com</a>
