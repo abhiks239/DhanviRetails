@@ -198,7 +198,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
 
 <header>
   <div class="wrap nav">
-    <a href="#top" class="logo" aria-label="Dhanvishta home">
+    <a href="#top" class="logo" aria-label="Logo.png">
       <span class="mark">D</span>Dhanvishta
     </a>
     <ul>
