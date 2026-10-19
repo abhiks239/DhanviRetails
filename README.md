@@ -298,8 +298,8 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
 <!-- ============ VIDEO ============ -->
 <!--
   VIDEO KAISE LAGAYEIN:
-  1) Apni video ko isi folder me rakho aur naam rakho:  video.mp4
-     (agar naam alag hai to neeche src="video.mp4" badal do)
+  1) Apni video ko isi folder me rakho aur naam rakho:  Video.mp4
+     (agar naam alag hai to neeche src="Video.mp4" badal do)
   2) Optional: thumbnail ke liye poster="thumbnail.jpg" add kar sakte ho
   Agar video file nahi mili to ye poora section apne aap hide ho jayega.
 -->
@@ -312,7 +312,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
     </div>
     <div class="video-box">
       <video id="demoVideo" controls playsinline preload="metadata">
-        <source src="video.mp4" type="video/mp4" />
+        <source src="Video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>
