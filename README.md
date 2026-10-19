@@ -233,7 +233,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
 
 <!-- ============ LOGO SPLASH ============ -->
 <div id="splash" aria-hidden="true">
-  <img src="Logo.png" alt="" class="splash-logo" onerror="document.getElementById('splash').classList.add('no-img')" />
+  <img src="Logoo.png" alt="" class="splash-logo" onerror="document.getElementById('splash').classList.add('no-img')" />
   <div class="splash-mark">D</div>
   <div class="splash-name">Dhanvishta</div>
   <div class="splash-tag">Your Business Simplified</div>
@@ -244,7 +244,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
   <div class="wrap nav">
    <a href="#top" class="logo" aria-label="Dhanvishta — Home">
   <span class="logo-mark">
-    <img src="Logo.png" alt="Dhanvishta" class="logo-img" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
+    <img src="Logoo.png" alt="Dhanvishta" class="logo-img" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
     <span class="mark" aria-hidden="true">D</span>
   </span>
   <span class="logo-text">Dhanvishta</span>
@@ -565,7 +565,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
   <div class="wrap foot">
     <a href="#top" class="logo">
   <span class="logo-mark">
-    <img src="Logo.png" alt="Dhanvishta" class="logo-img" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
+    <img src="Logoo.png" alt="Dhanvishta" class="logo-img" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
     <span class="mark" aria-hidden="true">D</span>
   </span>
   <span class="logo-text">Dhanvishta</span>
