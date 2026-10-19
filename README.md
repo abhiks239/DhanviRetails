@@ -105,8 +105,15 @@ h2{font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.03em;line-height:1.15;f
 /* ---------- VIDEO ---------- */
 .video-sec{background:#fff;padding-bottom:40px}
 .video-sec .head{margin-left:auto;margin-right:auto;text-align:center}
-.video-box{max-width:960px;margin:0 auto;border-radius:22px;overflow:hidden;border:6px solid #fff;box-shadow:var(--shadow-lg);background:#0b1530;aspect-ratio:16/9}
-.video-box video{width:100%;height:100%;display:block;object-fit:contain;background:#0b1530}
+.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;max-width:1040px;margin:0 auto}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s}
+.vcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.vcard.feat{grid-column:1/-1}
+.vbox{aspect-ratio:16/9;background:#0b1530}
+.vbox video{width:100%;height:100%;display:block;object-fit:contain;background:#0b1530}
+.vcap{padding:16px 20px 18px}
+.vcap h3{font-size:1.05rem;margin-bottom:2px}
+.vcap p{color:var(--muted);font-size:.88rem}
 
 /* ---------- problem ---------- */
 .problem{background:var(--bg2)}
@@ -217,7 +224,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
   .col{padding:28px 22px}
   .hero-visual{height:360px}
   .float-card{font-size:.76rem;min-width:170px;padding:11px 13px}
-  .video-box{border-width:4px;border-radius:16px}
+  .video-grid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
@@ -297,25 +304,20 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
 
 <!-- ============ VIDEO ============ -->
 <!--
-  VIDEO KAISE LAGAYEIN:
-  1) Apni video ko isi folder me rakho aur naam rakho:  Video.mp4
-     (agar naam alag hai to neeche src="Video.mp4" badal do)
-  2) Optional: thumbnail ke liye poster="thumbnail.jpg" add kar sakte ho
-  Agar video file nahi mili to ye poora section apne aap hide ho jayega.
+  VIDEO KAISE LAGAYEIN (max 5):
+  1) Apni videos isi folder me rakho (index.html ke saath).
+  2) Neeche <script> me "VIDEOS" list hai - wahan file ka naam aur title badal do.
+  3) Jo video file nahi milegi, uska card apne aap hide ho jayega.
+     Agar koi bhi video nahi mili to poora section hide ho jayega.
 -->
 <section id="video" class="video-sec">
   <div class="wrap">
     <div class="head">
       <span class="eyebrow">Watch</span>
-      <h2>See how it works in 2 minutes</h2>
-      <p>A quick look at software built for a real shop — billing, stock and reports.</p>
+      <h2>See our software in action</h2>
+      <p>Short videos of real software built for real shops.</p>
     </div>
-    <div class="video-box">
-      <video id="demoVideo" controls playsinline preload="metadata">
-        <source src="Video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    <div class="video-grid" id="videoGrid"></div>
   </div>
 </section>
 
@@ -597,17 +599,52 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
   else { window.addEventListener('load', schedule); setTimeout(closeSplash, 5000); }
   splash.addEventListener('click', closeSplash);   // click karke skip bhi kar sakte ho
 
-  /* ---- Video: file na mile to section hide ---- */
-  var v = document.getElementById('demoVideo');
-  var src = v.querySelector('source');
-  function hideVideo(){
-    var sec = document.getElementById('video');
-    if(sec) sec.style.display = 'none';
-    var links = document.querySelectorAll('a[href="#video"]');
-    for(var i=0;i<links.length;i++){ var li = links[i].closest('li'); if(li) li.style.display='none'; else links[i].style.display='none'; }
+  /* ---- Videos (max 5) ----
+     Yahan apni videos ke naam aur title likho. Poster (thumbnail) optional hai. */
+  var VIDEOS = [
+    { src:'video1.mp4', title:'Billing & Invoicing', text:'Fast GST bills in your own format', poster:'' },
+    { src:'video2.mp4', title:'Inventory & Stock',   text:'Brand-wise stock and alerts',       poster:'' },
+    { src:'video3.mp4', title:'Accounting & Reports',text:'Ledgers, P&L and GST summary',      poster:'' },
+    { src:'video4.mp4', title:'CRM & Follow-ups',    text:'Customers and pending payments',    poster:'' },
+    { src:'video5.mp4', title:'Automation Tools',    text:'Excel import and quick reports',    poster:'' }
+  ].slice(0,5);
+
+  var grid = document.getElementById('videoGrid');
+  VIDEOS.forEach(function(item){
+    var card = document.createElement('div');
+    card.className = 'vcard';
+    card.innerHTML = '<div class="vbox"><video controls playsinline preload="metadata"'
+      + (item.poster ? ' poster="'+item.poster+'"' : '')
+      + '><source src="'+item.src+'" type="video/mp4"></video></div>'
+      + '<div class="vcap"><h3></h3><p></p></div>';
+    card.querySelector('h3').textContent = item.title;
+    card.querySelector('p').textContent = item.text;
+    var vid = card.querySelector('video');
+    var srcEl = card.querySelector('source');
+    function bad(){ card.style.display='none'; card.dataset.bad='1'; layout(); }
+    srcEl.addEventListener('error', bad);
+    vid.addEventListener('error', bad);
+    // ek video chalne par baaki pause ho jayein
+    vid.addEventListener('play', function(){
+      var all = grid.querySelectorAll('video');
+      for(var i=0;i<all.length;i++){ if(all[i]!==vid) all[i].pause(); }
+    });
+    grid.appendChild(card);
+  });
+
+  function layout(){
+    var cards = grid.querySelectorAll('.vcard');
+    var vis = [];
+    for(var i=0;i<cards.length;i++){ cards[i].classList.remove('feat'); if(!cards[i].dataset.bad) vis.push(cards[i]); }
+    if(vis.length === 0){
+      document.getElementById('video').style.display = 'none';
+      var links = document.querySelectorAll('a[href="#video"]');
+      for(var j=0;j<links.length;j++){ var li = links[j].closest('li'); (li||links[j]).style.display='none'; }
+      return;
+    }
+    if(vis.length % 2 === 1) vis[0].classList.add('feat');   // odd ho to pehli video badi
   }
-  src.addEventListener('error', hideVideo);
-  v.addEventListener('error', hideVideo);
+  layout();
 })();
 </script>
 
