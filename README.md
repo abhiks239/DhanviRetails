@@ -1,4 +1,4 @@
-<html lang="en"> 
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,11 +21,27 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.splash-on{overflow:hidden}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
 h1,h2,h3,h4{font-family:var(--h);color:var(--text)}
+
+/* ---------- LOGO SPLASH (full page flash) ---------- */
+#splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:radial-gradient(circle at 50% 40%,#ffffff 0%,#eaf1ff 55%,#dbe7ff 100%);transition:opacity .7s ease,visibility .7s ease,transform .7s ease}
+#splash.hide{opacity:0;visibility:hidden;transform:scale(1.06)}
+.splash-logo{width:min(62vw,340px);height:auto;max-height:42vh;object-fit:contain;animation:splashIn 1s cubic-bezier(.2,.8,.2,1) both}
+.splash-mark{display:none;width:150px;height:150px;border-radius:40px;background:linear-gradient(135deg,var(--blue),var(--sky));place-items:center;color:#fff;font-family:var(--h);font-weight:800;font-size:5rem;box-shadow:0 20px 50px rgba(37,99,235,.4);animation:splashIn 1s cubic-bezier(.2,.8,.2,1) both}
+#splash.no-img .splash-logo{display:none}
+#splash.no-img .splash-mark{display:grid}
+.splash-name{font-family:var(--h);font-weight:800;font-size:clamp(1.8rem,5vw,2.8rem);letter-spacing:-.03em;color:var(--text);animation:splashUp .9s .35s cubic-bezier(.2,.8,.2,1) both}
+.splash-tag{color:var(--muted);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:.85rem;margin-top:-12px;animation:splashUp .9s .55s cubic-bezier(.2,.8,.2,1) both}
+.splash-bar{width:160px;height:4px;border-radius:9px;background:#cfdcf7;overflow:hidden;animation:splashUp .9s .7s both}
+.splash-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--sky));animation:load 2.1s .2s ease-out forwards}
+@keyframes splashIn{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+@keyframes splashUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes load{to{width:100%}}
 
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s,border-color .2s;font-family:inherit}
@@ -85,6 +101,12 @@ section{padding:92px 0}
 .eyebrow{display:inline-block;font-family:var(--h);font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
 h2{font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.03em;line-height:1.15;font-weight:800}
 .head p{color:var(--muted);margin-top:14px;font-size:1.05rem}
+
+/* ---------- VIDEO ---------- */
+.video-sec{background:#fff;padding-bottom:40px}
+.video-sec .head{margin-left:auto;margin-right:auto;text-align:center}
+.video-box{max-width:960px;margin:0 auto;border-radius:22px;overflow:hidden;border:6px solid #fff;box-shadow:var(--shadow-lg);background:#0b1530;aspect-ratio:16/9}
+.video-box video{width:100%;height:100%;display:block;object-fit:contain;background:#0b1530}
 
 /* ---------- problem ---------- */
 .problem{background:var(--bg2)}
@@ -195,23 +217,33 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
   .col{padding:28px 22px}
   .hero-visual{height:360px}
   .float-card{font-size:.76rem;min-width:170px;padding:11px 13px}
+  .video-box{border-width:4px;border-radius:16px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
-<body>
+<body class="splash-on">
+
+<!-- ============ LOGO SPLASH ============ -->
+<div id="splash" aria-hidden="true">
+  <img src="Logo.png" alt="" class="splash-logo" onerror="document.getElementById('splash').classList.add('no-img')" />
+  <div class="splash-mark">D</div>
+  <div class="splash-name">Dhanvishta</div>
+  <div class="splash-tag">Your Business Simplified</div>
+  <div class="splash-bar"><span></span></div>
+</div>
 
 <header>
   <div class="wrap nav">
    <a href="#top" class="logo" aria-label="Dhanvishta — Home">
   <span class="logo-mark">
-    <img src="Logo.png" alt="Dhanvishta" class="logo-img"
-         onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
+    <img src="Logo.png" alt="Dhanvishta" class="logo-img" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
     <span class="mark" aria-hidden="true">D</span>
   </span>
   <span class="logo-text">Dhanvishta</span>
 </a>
     <ul>
+      <li><a href="#video">Video</a></li>
       <li><a href="#problem">Problem</a></li>
       <li><a href="#compare">With vs Without</a></li>
       <li><a href="#work">Examples</a></li>
@@ -232,7 +264,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
       <p class="lead">We build custom billing, accounting, inventory and CRM software for Windows. Pay one time. Your data stays on your own computer.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://wa.me/919555613854?text=Hi%20Dhanvishta%2C%20I%20want%20a%20quote%20for%20custom%20software." target="_blank" rel="noopener">Get a free quote on WhatsApp</a>
-        <a class="btn btn-ghost" href="#work">See real examples</a>
+        <a class="btn btn-ghost" href="#video">Watch video</a>
       </div>
       <div class="proof">
         <span><b>₹1,999</b> one-time start</span>
@@ -262,6 +294,30 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
     </div>
   </div>
 </div>
+
+<!-- ============ VIDEO ============ -->
+<!--
+  VIDEO KAISE LAGAYEIN:
+  1) Apni video ko isi folder me rakho aur naam rakho:  video.mp4
+     (agar naam alag hai to neeche src="video.mp4" badal do)
+  2) Optional: thumbnail ke liye poster="thumbnail.jpg" add kar sakte ho
+  Agar video file nahi mili to ye poora section apne aap hide ho jayega.
+-->
+<section id="video" class="video-sec">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Watch</span>
+      <h2>See how it works in 2 minutes</h2>
+      <p>A quick look at software built for a real shop — billing, stock and reports.</p>
+    </div>
+    <div class="video-box">
+      <video id="demoVideo" controls playsinline preload="metadata">
+        <source src="video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</section>
 
 <!-- ============ PROBLEM ============ -->
 <section id="problem" class="problem">
@@ -507,8 +563,7 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
   <div class="wrap foot">
     <a href="#top" class="logo">
   <span class="logo-mark">
-    <img src="Logo.png" alt="Dhanvishta" class="logo-img"
-         onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
+    <img src="Logo.png" alt="Dhanvishta" class="logo-img" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" />
     <span class="mark" aria-hidden="true">D</span>
   </span>
   <span class="logo-text">Dhanvishta</span>
@@ -520,6 +575,41 @@ footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-s
     <div>© 2026 Dhanvishta · Your Business Simplified</div>
   </div>
 </footer>
+
+<script>
+(function(){
+  /* ---- Logo splash: ~2.3 sec baad fade out, phir website ---- */
+  var splash = document.getElementById('splash');
+  var done = false;
+  function closeSplash(){
+    if(done) return; done = true;
+    splash.classList.add('hide');
+    document.body.classList.remove('splash-on');
+    setTimeout(function(){ splash.remove(); }, 900);
+  }
+  var SPLASH_MS = 2300;               // yahan time badla sakte ho (milliseconds)
+  var start = Date.now();
+  function schedule(){
+    var wait = Math.max(0, SPLASH_MS - (Date.now() - start));
+    setTimeout(closeSplash, wait);
+  }
+  if(document.readyState === 'complete'){ schedule(); }
+  else { window.addEventListener('load', schedule); setTimeout(closeSplash, 5000); }
+  splash.addEventListener('click', closeSplash);   // click karke skip bhi kar sakte ho
+
+  /* ---- Video: file na mile to section hide ---- */
+  var v = document.getElementById('demoVideo');
+  var src = v.querySelector('source');
+  function hideVideo(){
+    var sec = document.getElementById('video');
+    if(sec) sec.style.display = 'none';
+    var links = document.querySelectorAll('a[href="#video"]');
+    for(var i=0;i<links.length;i++){ var li = links[i].closest('li'); if(li) li.style.display='none'; else links[i].style.display='none'; }
+  }
+  src.addEventListener('error', hideVideo);
+  v.addEventListener('error', hideVideo);
+})();
+</script>
 
 </body>
 </html>
